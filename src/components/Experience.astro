@@ -1,0 +1,259 @@
+---
+---
+<section id="experience" class="section">
+  <div class="container">
+    <div class="exp-header">
+      <span class="label">Experience</span>
+      <h2>Where I've worked</h2>
+    </div>
+
+    <div class="exp-content">
+      <!-- Timeline Line -->
+      <div class="timeline-line">
+        <div class="line-fill"></div>
+      </div>
+
+      <!-- Experience Item -->
+      <div class="exp-item">
+        <div class="exp-marker">
+          <div class="marker-dot"></div>
+          <div class="marker-ring"></div>
+        </div>
+        
+        <div class="exp-meta">
+          <span class="exp-date">Nov 2023 — Aug 2024</span>
+          <span class="exp-location">Bengaluru, India</span>
+        </div>
+
+        <div class="exp-details">
+          <h3>Associate, Data Analytics & Reporting</h3>
+          <h4>Genpact India</h4>
+          
+          <div class="exp-highlights">
+            <div class="highlight">
+              <span class="highlight-icon">📊</span>
+              <div>
+                <strong>Reporting Automation</strong>
+                <p>Managed end-to-end data extraction using Control-M and Linux, reducing manual intervention by 25%.</p>
+              </div>
+            </div>
+            <div class="highlight">
+              <span class="highlight-icon">📈</span>
+              <div>
+                <strong>MIS Reporting</strong>
+                <p>Delivered daily/weekly/monthly reports with 99% accuracy; reduced generation time by 40%.</p>
+              </div>
+            </div>
+            <div class="highlight">
+              <span class="highlight-icon">🎯</span>
+              <div>
+                <strong>Data Visualization</strong>
+                <p>Created interactive dashboards for KPI tracking and trend identification.</p>
+              </div>
+            </div>
+            <div class="highlight">
+              <span class="highlight-icon">🤝</span>
+              <div>
+                <strong>Stakeholder Management</strong>
+                <p>Primary contact for multiple clients, leading 15+ weekly alignment calls.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-tags">
+            <span>Python</span>
+            <span>SQL</span>
+            <span>Control-M</span>
+            <span>Linux</span>
+            <span>Power BI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #experience {
+    padding: 8rem 0;
+  }
+
+  .exp-header {
+    margin-bottom: 4rem;
+  }
+
+  .label {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .exp-header h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--heading-color);
+  }
+
+  .exp-content {
+    position: relative;
+    max-width: 900px;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .line-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, var(--aurora-teal), var(--aurora-green), var(--aurora-purple));
+    transform-origin: top;
+    animation: fillLine 1s ease-out;
+  }
+
+  @keyframes fillLine {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  .exp-item {
+    position: relative;
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .exp-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marker-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--aurora-teal);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .marker-ring {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--aurora-teal);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.1; }
+  }
+
+  .exp-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-date {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--aurora-green);
+    font-family: var(--font-heading);
+  }
+
+  .exp-location {
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+
+  .exp-details h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-details h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+  }
+
+  .exp-highlights {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .highlight {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .highlight-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .highlight strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--heading-color);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+
+  .highlight p {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .exp-tags span {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--aurora-teal);
+    background: rgba(45, 212, 191, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    border-radius: 0.5rem;
+    font-family: var(--font-heading);
+  }
+
+  @media (max-width: 600px) {
+    .exp-item {
+      padding-left: 2rem;
+    }
+    .timeline-line {
+      left: 5px;
+    }
+  }
+</style>

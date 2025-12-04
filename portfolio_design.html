@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Amritha Devangana - Data Scientist">
+    <title>Amritha Devangana | Data Scientist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #0d0d0d;
+            --surface-light: #1a1a1a;
+            --text: #e0e0e0;
+            --text-muted: #888;
+            --heading: #ffffff;
+            --accent: #00ff9d;
+            --accent-secondary: #00aaff;
+            --accent-tertiary: #8855ff;
+            --accent-dim: rgba(0, 255, 157, 0.12);
+            --accent-glow: rgba(0, 255, 157, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-display);
+            color: var(--heading);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-ghost {
+            border-color: var(--text-muted);
+            color: var(--text);
+        }
+
+        .btn-ghost:hover {
+            background: var(--heading);
+            color: var(--bg);
+            border-color: var(--heading);
+            box-shadow: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.4s;
+        }
+
+        nav.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 6rem;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .hero-tags {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            letter-spacing: 1px;
+            font-family: var(--font-display);
+        }
+
+        .hero-bg {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .node {
+            position: absolute;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .node:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            right: 10%;
+            filter: blur(60px);
+        }
+
+        .node:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 30%;
+            animation-delay: -2s;
+            filter: blur(40px);
+            background: #00aaff;
+        }
+
+        .node:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 40%;
+            right: 50%;
+            animation-delay: -4s;
+            filter: blur(20px);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-20px, -40px);
+            }
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .bio {
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .bio strong {
+            color: var(--heading);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            border-left: 1px solid var(--border);
+            padding-left: 2rem;
+        }
+
+        .stat-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px -10px var(--accent-glow);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border-radius: 12px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .stat-icon.blue {
+            background: rgba(0, 170, 255, 0.12);
+            color: #00aaff;
+        }
+
+        .stat-icon.purple {
+            background: rgba(136, 85, 255, 0.12);
+            color: #8855ff;
+        }
+
+        .stat-icon.gold {
+            background: rgba(255, 170, 0, 0.12);
+            color: #ffaa00;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-family: var(--font-display);
+            color: var(--heading);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .stat-graph {
+            width: 60px;
+            opacity: 0.8;
+        }
+
+        .mini-graph {
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Work */
+        .case-study {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: center;
+        }
+
+        .case-study:nth-child(even) {
+            direction: rtl;
+        }
+
+        .case-study:nth-child(even)>* {
+            direction: ltr;
+        }
+
+        .case-visual {
+            height: 400px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .case-visual:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .case-visual::before {
+            content: attr(data-num);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.02);
+            font-family: var(--font-display);
+            z-index: 0;
+        }
+
+        /* Data Stream Animation for Card 01 */
+        .data-stream {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .stream-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: stream 3s linear infinite;
+            opacity: 0.6;
+        }
+
+        .stream-line:nth-child(1) {
+            top: 20%;
+            width: 60%;
+            animation-delay: 0s;
+        }
+
+        .stream-line:nth-child(2) {
+            top: 35%;
+            width: 80%;
+            animation-delay: 0.5s;
+        }
+
+        .stream-line:nth-child(3) {
+            top: 50%;
+            width: 50%;
+            animation-delay: 1s;
+        }
+
+        .stream-line:nth-child(4) {
+            top: 65%;
+            width: 70%;
+            animation-delay: 1.5s;
+        }
+
+        .stream-line:nth-child(5) {
+            top: 80%;
+            width: 55%;
+            animation-delay: 2s;
+        }
+
+        @keyframes stream {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateX(200%);
+                opacity: 0;
+            }
+        }
+
+        .data-dots {
+            position: absolute;
+            inset: 0;
+        }
+
+        .data-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        .data-dot:nth-child(1) {
+            top: 25%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .data-dot:nth-child(2) {
+            top: 40%;
+            left: 45%;
+            animation-delay: 0.3s;
+        }
+
+        .data-dot:nth-child(3) {
+            top: 55%;
+            left: 70%;
+            animation-delay: 0.6s;
+        }
+
+        .data-dot:nth-child(4) {
+            top: 70%;
+            left: 35%;
+            animation-delay: 0.9s;
+        }
+
+        .data-dot:nth-child(5) {
+            top: 30%;
+            left: 80%;
+            animation-delay: 1.2s;
+        }
+
+        .data-dot:nth-child(6) {
+            top: 60%;
+            left: 15%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+                box-shadow: 0 0 10px var(--accent);
+            }
+        }
+
+        /* Bar Chart Animation for Card 02 */
+        .chart-bars {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            height: 200px;
+        }
+
+        .bar {
+            width: 30px;
+            background: linear-gradient(180deg, var(--accent), rgba(0, 255, 157, 0.3));
+            border-radius: 4px 4px 0 0;
+            animation: grow 2s ease-out infinite alternate;
+            position: relative;
+        }
+
+        .bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .bar:nth-child(1) {
+            height: 60%;
+            animation-delay: 0s;
+            background: linear-gradient(180deg, #00ff9d, rgba(0, 255, 157, 0.2));
+        }
+
+        .bar:nth-child(2) {
+            height: 80%;
+            animation-delay: 0.1s;
+            background: linear-gradient(180deg, #00aaff, rgba(0, 170, 255, 0.2));
+        }
+
+        .bar:nth-child(3) {
+            height: 45%;
+            animation-delay: 0.2s;
+            background: linear-gradient(180deg, #8855ff, rgba(136, 85, 255, 0.2));
+        }
+
+        .bar:nth-child(4) {
+            height: 95%;
+            animation-delay: 0.3s;
+            background: linear-gradient(180deg, #00ff9d, rgba(0, 255, 157, 0.2));
+        }
+
+        .bar:nth-child(5) {
+            height: 70%;
+            animation-delay: 0.4s;
+            background: linear-gradient(180deg, #ffaa00, rgba(255, 170, 0, 0.2));
+        }
+
+        .bar:nth-child(6) {
+            height: 55%;
+            animation-delay: 0.5s;
+            background: linear-gradient(180deg, #00aaff, rgba(0, 170, 255, 0.2));
+        }
+
+        @keyframes grow {
+            0% {
+                transform: scaleY(0.8);
+            }
+
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        .chart-grid {
+            position: absolute;
+            inset: 40px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-grid::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 33%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .chart-grid::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 66%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scatter Plot Animation for Card 03 */
+        .scatter-plot {
+            position: absolute;
+            inset: 40px;
+        }
+
+        .scatter-point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: scatter-appear 0.5s ease-out forwards, pulse-point 3s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .scatter-point:nth-child(1) {
+            left: 10%;
+            bottom: 15%;
+            background: #00ff9d;
+            animation-delay: 0s;
+        }
+
+        .scatter-point:nth-child(2) {
+            left: 15%;
+            bottom: 22%;
+            background: #00ff9d;
+            animation-delay: 0.1s;
+        }
+
+        .scatter-point:nth-child(3) {
+            left: 22%;
+            bottom: 28%;
+            background: #00aaff;
+            animation-delay: 0.2s;
+        }
+
+        .scatter-point:nth-child(4) {
+            left: 28%;
+            bottom: 35%;
+            background: #00ff9d;
+            animation-delay: 0.3s;
+        }
+
+        .scatter-point:nth-child(5) {
+            left: 35%;
+            bottom: 40%;
+            background: #8855ff;
+            animation-delay: 0.4s;
+        }
+
+        .scatter-point:nth-child(6) {
+            left: 42%;
+            bottom: 48%;
+            background: #00aaff;
+            animation-delay: 0.5s;
+        }
+
+        .scatter-point:nth-child(7) {
+            left: 50%;
+            bottom: 52%;
+            background: #00ff9d;
+            animation-delay: 0.6s;
+        }
+
+        .scatter-point:nth-child(8) {
+            left: 58%;
+            bottom: 58%;
+            background: #8855ff;
+            animation-delay: 0.7s;
+        }
+
+        .scatter-point:nth-child(9) {
+            left: 65%;
+            bottom: 65%;
+            background: #00aaff;
+            animation-delay: 0.8s;
+        }
+
+        .scatter-point:nth-child(10) {
+            left: 72%;
+            bottom: 70%;
+            background: #00ff9d;
+            animation-delay: 0.9s;
+        }
+
+        .scatter-point:nth-child(11) {
+            left: 80%;
+            bottom: 78%;
+            background: #ffaa00;
+            animation-delay: 1s;
+        }
+
+        .scatter-point:nth-child(12) {
+            left: 88%;
+            bottom: 85%;
+            background: #00ff9d;
+            animation-delay: 1.1s;
+        }
+
+        @keyframes scatter-appear {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            100% {
+                opacity: 0.9;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse-point {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .regression-line {
+            position: absolute;
+            left: 8%;
+            bottom: 12%;
+            width: 85%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #00aaff);
+            transform: rotate(-35deg);
+            transform-origin: left bottom;
+            animation: draw-line 1.5s ease-out forwards;
+            opacity: 0;
+            animation-delay: 1.2s;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        @keyframes draw-line {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            100% {
+                width: 85%;
+                opacity: 0.8;
+            }
+        }
+
+        .ml-label {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-family: var(--font-display);
+            animation: fade-in-label 0.5s ease-out 1.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fade-in-label {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .case-content {
+            padding: 2rem 0;
+        }
+
+        .case-role {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: block;
+            font-family: var(--font-display);
+        }
+
+        .case-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-desc {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .metric-row {
+            display: flex;
+            gap: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .metric-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--heading);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== SKILLS DASHBOARD SECTION ===== */
+        .skills-section {
+            background: linear-gradient(180deg, var(--bg) 0%, #080808 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 255, 157, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .skills-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .skills-header h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Stats Row */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .dash-stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dash-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .dash-stat:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px -15px var(--accent-glow);
+        }
+
+        .dash-stat:hover::before {
+            opacity: 1;
+        }
+
+        .dash-stat-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .dash-stat-icon.green {
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.2), rgba(0, 255, 157, 0.05));
+            color: var(--accent);
+        }
+
+        .dash-stat-icon.blue {
+            background: linear-gradient(135deg, rgba(0, 170, 255, 0.2), rgba(0, 170, 255, 0.05));
+            color: var(--accent-secondary);
+        }
+
+        .dash-stat-icon.purple {
+            background: linear-gradient(135deg, rgba(136, 85, 255, 0.2), rgba(136, 85, 255, 0.05));
+            color: var(--accent-tertiary);
+        }
+
+        .dash-stat-icon.gold {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.2), rgba(255, 170, 0, 0.05));
+            color: #ffaa00;
+        }
+
+        .dash-stat-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dash-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: var(--font-display);
+            color: var(--heading);
+            line-height: 1;
+        }
+
+        .dash-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .dash-stat-graph {
+            width: 70px;
+            height: 35px;
+            flex-shrink: 0;
+        }
+
+        /* Charts Row */
+        .dashboard-charts {
+            display: grid;
+            grid-template-columns: 320px 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .chart-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .chart-card:hover {
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--heading);
+        }
+
+        .chart-badge {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .chart-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 280px;
+            position: relative;
+        }
+
+        /* Radial Chart Styles */
+        #radial-chart {
+            width: 100%;
+            height: 220px;
+            position: relative;
+        }
+
+        #radial-chart svg {
+            overflow: visible;
+        }
+
+        .skill-arc {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skill-arc:hover {
+            filter: brightness(1.2) drop-shadow(0 0 12px currentColor) !important;
+        }
+
+        .chart-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 10px 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.2s ease;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 255, 157, 0.2);
+        }
+
+        .chart-tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--heading);
+            margin-bottom: 4px;
+        }
+
+        .tooltip-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: var(--font-display);
+        }
+
+        /* Skill Bars */
+        .skill-bars {
+            width: 100%;
+        }
+
+        .skill-bar-item {
+            margin-bottom: 1.25rem;
+        }
+
+        .skill-bar-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar-name {
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .skill-bar-value {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-family: var(--font-display);
+        }
+
+        .skill-bar-track {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .skill-bar-fill.green {
+            background: linear-gradient(90deg, var(--accent), #00cc7a);
+        }
+
+        .skill-bar-fill.blue {
+            background: linear-gradient(90deg, var(--accent-secondary), #0088cc);
+        }
+
+        .skill-bar-fill.purple {
+            background: linear-gradient(90deg, var(--accent-tertiary), #6633cc);
+        }
+
+        .skill-bar-fill.gold {
+            background: linear-gradient(90deg, #ffaa00, #cc8800);
+        }
+
+        /* Tools Grid */
+        .tools-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .tool-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .tool-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            background: var(--accent-dim);
+            box-shadow: 0 8px 25px -10px var(--accent-glow);
+        }
+
+        .tool-icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-display);
+            box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .tool-icon.python {
+            background: linear-gradient(135deg, #3776ab, #ffd43b);
+            color: #fff;
+        }
+
+        .tool-icon.sql {
+            background: linear-gradient(135deg, #00758f, #f29111);
+            color: #fff;
+        }
+
+        .tool-icon.r {
+            background: linear-gradient(135deg, #276dc3, #75aadb);
+            color: #fff;
+        }
+
+        .tool-icon.powerbi {
+            background: linear-gradient(135deg, #f2c811, #e8a500);
+            color: #000;
+        }
+
+        .tool-icon.tableau {
+            background: linear-gradient(135deg, #e97627, #c72037);
+            color: #fff;
+        }
+
+        .tool-icon.tensorflow {
+            background: linear-gradient(135deg, #ff6f00, #ffa800);
+            color: #fff;
+        }
+
+        .tool-icon.aws {
+            background: linear-gradient(135deg, #232f3e, #ff9900);
+            color: #fff;
+        }
+
+        .tool-icon.git {
+            background: linear-gradient(135deg, #f14e32, #f34f29);
+            color: #fff;
+        }
+
+        .tool-icon.pandas {
+            background: linear-gradient(135deg, #150458, #e70488);
+            color: #fff;
+        }
+
+        .tool-icon.numpy {
+            background: linear-gradient(135deg, #4dabcf, #4d77cf);
+            color: #fff;
+        }
+
+        .tool-icon.sklearn {
+            background: linear-gradient(135deg, #f89939, #3499cd);
+            color: #fff;
+        }
+
+        .tool-icon.linux {
+            background: linear-gradient(135deg, #333, #fcc624);
+            color: #fff;
+        }
+
+        .tool-name {
+            font-size: 0.8rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .tool-level {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Process */
+        .process-track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .process-track::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .process-step {
+            position: relative;
+            z-index: 1;
+            width: 14%;
+            text-align: center;
+        }
+
+        .step-dot {
+            width: 40px;
+            height: 40px;
+            background: var(--surface);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .step-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--heading);
+        }
+
+        .step-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Results */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .result-card {
+            background: var(--surface);
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+        }
+
+        .result-val {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: var(--font-display);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .footer h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 2px;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dashboard-charts {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-grid,
+            .case-study,
+            .case-study:nth-child(even),
+            .dashboard-charts {
+                grid-template-columns: 1fr;
+                direction: ltr;
+                gap: 1.5rem;
+            }
+
+            .stats-grid,
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+                border-left: none;
+                padding-left: 0;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-track {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .process-track::before {
+                width: 2px;
+                height: 100%;
+                left: 20px;
+                top: 0;
+            }
+
+            .process-step {
+                width: 100%;
+                text-align: left;
+                padding-left: 60px;
+            }
+
+            .step-dot {
+                position: absolute;
+                left: 0;
+                top: 0;
+                margin: 0;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section {
+                padding: 5rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SVG Gradients -->
+    <svg width="0" height="0">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00ff9d" />
+                <stop offset="100%" stop-color="#00ff9d" stop-opacity="0.3" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00aaff" />
+                <stop offset="100%" stop-color="#00aaff" stop-opacity="0.3" />
+            </linearGradient>
+            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#8855ff" />
+                <stop offset="100%" stop-color="#8855ff" stop-opacity="0.3" />
+            </linearGradient>
+            <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffaa00" />
+                <stop offset="100%" stop-color="#ffaa00" stop-opacity="0.3" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="logo">AMRITHA <span>/ DS</span></a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#work">Work</a>
+                <a href="#skills">Skills</a>
+                <a href="#process">Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg">
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Turning complex data into clear decisions.</h1>
+                <p>Data Scientist specializing in Machine Learning, Analytics, and Experimentation. Transforming raw
+                    signals into business impact.</p>
+                <div class="hero-ctas">
+                    <a href="#contact" class="btn">Download CV</a>
+                    <a href="#work" class="btn btn-ghost">View Projects</a>
+                </div>
+                <div class="hero-tags">MACHINE LEARNING · EXPERIMENTATION · ANALYTICS</div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-grid fade-in">
+                <div class="bio">
+                    <p>I am a results-driven <strong>Data Scientist</strong> with a passion for uncovering hidden
+                        patterns. With a background in <strong>Information Technology</strong> and an MSc in
+                        <strong>Data Science</strong> from the University of Leeds, I bridge the gap between technical
+                        complexity and strategic business value.
+                    </p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱</div>
+                        <div class="stat-content"><span class="stat-value" data-target="3">0</span><span
+                                class="stat-label">Years Exp</span></div>
+                        <svg viewBox="0 0 60 30" class="stat-graph mini-graph">
+                            <polyline points="0,25 10,22 20,18 30,15 40,10 50,8 60,5" fill="none" stroke="url(#grad1)"
+                                stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">💻</div>
+                        <div class="stat-content"><span class="stat-value" data-target="15">0</span><span
+                                class="stat-label">ML Models</span></div>
+                        <svg viewBox="0 0 60 30" class="stat-graph mini-graph">
+                            <polyline points="0,20 15,22 25,12 35,18 45,8 60,10" fill="none" stroke="url(#grad2)"
+                                stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">📊</div>
+                        <div class="stat-content"><span class="stat-value" data-target="8">0</span><span
+                                class="stat-label">Projects</span></div>
+                        <svg viewBox="0 0 60 30" class="stat-graph mini-graph">
+                            <polyline points="0,28 12,20 24,22 36,12 48,15 60,5" fill="none" stroke="url(#grad3)"
+                                stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold">🌍</div>
+                        <div class="stat-content"><span class="stat-value" style="font-size:1.2rem">India /
+                                UK</span><span class="stat-label">Location</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="section">
+        <div class="container">
+            <h2 style="margin-bottom:4rem;font-size:1.5rem;opacity:0.5;">SELECTED WORK</h2>
+
+            <!-- Card 01: Automated Reporting - Data Stream Animation -->
+            <article class="case-study fade-in">
+                <div class="case-visual" data-num="01">
+                    <div class="data-stream">
+                        <div class="stream-line"></div>
+                        <div class="stream-line"></div>
+                        <div class="stream-line"></div>
+                        <div class="stream-line"></div>
+                        <div class="stream-line"></div>
+                    </div>
+                    <div class="data-dots">
+                        <div class="data-dot"></div>
+                        <div class="data-dot"></div>
+                        <div class="data-dot"></div>
+                        <div class="data-dot"></div>
+                        <div class="data-dot"></div>
+                        <div class="data-dot"></div>
+                    </div>
+                </div>
+                <div class="case-content">
+                    <span class="case-role">Genpact India</span>
+                    <h3 class="case-title">Automated Reporting System</h3>
+                    <p class="case-desc">Designed and implemented an end-to-end automated reporting pipeline using
+                        Control-M and Linux, replacing manual data extraction processes.</p>
+                    <div class="metric-row">
+                        <div><span class="metric-val">25%</span><span class="metric-label">Reduction in Manual
+                                Work</span></div>
+                        <div><span class="metric-val">99%</span><span class="metric-label">Report Accuracy</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 02: KPI Dashboard - Bar Chart Animation -->
+            <article class="case-study fade-in">
+                <div class="case-visual" data-num="02">
+                    <div class="chart-grid"></div>
+                    <div class="chart-bars">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+                <div class="case-content">
+                    <span class="case-role">Analytics Project</span>
+                    <h3 class="case-title">KPI Dashboard Suite</h3>
+                    <p class="case-desc">Developed interactive dashboards for real-time KPI tracking and trend
+                        identification, enabling stakeholders to make faster data-driven decisions.</p>
+                    <div class="metric-row">
+                        <div><span class="metric-val">40%</span><span class="metric-label">Faster Generation Time</span>
+                        </div>
+                        <div><span class="metric-val">15+</span><span class="metric-label">Stakeholders Aligned</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 03: Predictive Modeling - Scatter Plot Animation -->
+            <article class="case-study fade-in">
+                <div class="case-visual" data-num="03">
+                    <div class="scatter-plot">
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="scatter-point"></div>
+                        <div class="regression-line"></div>
+                    </div>
+                    <div class="ml-label">R² = 0.94</div>
+                </div>
+                <div class="case-content">
+                    <span class="case-role">Academic Research</span>
+                    <h3 class="case-title">Predictive Modeling</h3>
+                    <p class="case-desc">Utilized advanced machine learning techniques to predict market trends and
+                        customer behavior during MSc research at University of Leeds.</p>
+                    <div class="metric-row">
+                        <div><span class="metric-val">MSc</span><span class="metric-label">Data Science &
+                                Analytics</span></div>
+                        <div><span class="metric-val">ML</span><span class="metric-label">Advanced Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ENHANCED SKILLS SECTION -->
+    <section id="skills" class="section skills-section">
+        <div class="container">
+            <div class="skills-header fade-in">
+                <h2>Technical Arsenal</h2>
+                <p>A comprehensive overview of my data science toolkit</p>
+            </div>
+
+            <div class="dashboard-layout fade-in">
+                <!-- Stats Row -->
+                <div class="dashboard-stats">
+                    <div class="dash-stat">
+                        <div class="dash-stat-icon green">⏱</div>
+                        <div class="dash-stat-content">
+                            <div class="dash-stat-value" data-target="3">0+</div>
+                            <div class="dash-stat-label">Years Experience</div>
+                        </div>
+                        <svg viewBox="0 0 70 35" class="dash-stat-graph">
+                            <polyline points="0,30 12,25 24,20 36,15 48,12 60,8 70,5" fill="none" stroke="url(#grad1)"
+                                stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="dash-stat">
+                        <div class="dash-stat-icon blue">🧠</div>
+                        <div class="dash-stat-content">
+                            <div class="dash-stat-value" data-target="15">0+</div>
+                            <div class="dash-stat-label">ML Models Built</div>
+                        </div>
+                        <svg viewBox="0 0 70 35" class="dash-stat-graph">
+                            <polyline points="0,25 15,28 25,15 40,20 55,10 70,12" fill="none" stroke="url(#grad2)"
+                                stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="dash-stat">
+                        <div class="dash-stat-icon purple">📊</div>
+                        <div class="dash-stat-content">
+                            <div class="dash-stat-value" data-target="8">0+</div>
+                            <div class="dash-stat-label">Projects Delivered</div>
+                        </div>
+                        <svg viewBox="0 0 70 35" class="dash-stat-graph">
+                            <polyline points="0,32 14,22 28,26 42,14 56,18 70,6" fill="none" stroke="url(#grad3)"
+                                stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="dash-stat">
+                        <div class="dash-stat-icon gold">📈</div>
+                        <div class="dash-stat-content">
+                            <div class="dash-stat-value">99%</div>
+                            <div class="dash-stat-label">Report Accuracy</div>
+                        </div>
+                        <svg viewBox="0 0 70 35" class="dash-stat-graph">
+                            <polyline points="0,28 10,20 25,22 40,12 55,15 70,5" fill="none" stroke="url(#grad4)"
+                                stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="dashboard-charts">
+                    <!-- Radial Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Core Skills</span>
+                            <span class="chart-badge">Proficiency</span>
+                        </div>
+                        <div class="chart-content" id="radial-chart"></div>
+                    </div>
+
+                    <!-- Skill Bars -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Programming & Tools</span>
+                            <span class="chart-badge">Languages</span>
+                        </div>
+                        <div class="skill-bars">
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Python</span><span
+                                        class="skill-bar-value">92%</span></div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill green" style="width:0%" data-width="92"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">SQL</span><span
+                                        class="skill-bar-value">88%</span></div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill blue" style="width:0%" data-width="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">R</span><span
+                                        class="skill-bar-value">75%</span></div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill purple" style="width:0%" data-width="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Power BI</span><span
+                                        class="skill-bar-value">85%</span></div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill gold" style="width:0%" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-item">
+                                <div class="skill-bar-header"><span class="skill-bar-name">Linux/Bash</span><span
+                                        class="skill-bar-value">70%</span></div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill green" style="width:0%" data-width="70"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Area Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span class="chart-title">Expertise Growth</span>
+                            <span class="chart-badge">Timeline</span>
+                        </div>
+                        <div class="chart-content" id="area-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Tools Grid -->
+                <div class="tools-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Tech Stack</span>
+                        <span class="chart-badge">12 Tools</span>
+                    </div>
+                    <div class="tools-grid">
+                        <div class="tool-item">
+                            <div class="tool-icon python">Py</div><span class="tool-name">Python</span><span
+                                class="tool-level">Expert</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon sql">SQL</div><span class="tool-name">SQL</span><span
+                                class="tool-level">Advanced</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon r">R</div><span class="tool-name">R Lang</span><span
+                                class="tool-level">Proficient</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon powerbi">PBI</div><span class="tool-name">Power BI</span><span
+                                class="tool-level">Advanced</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon tableau">Tab</div><span class="tool-name">Tableau</span><span
+                                class="tool-level">Proficient</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon pandas">Pd</div><span class="tool-name">Pandas</span><span
+                                class="tool-level">Expert</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon numpy">Np</div><span class="tool-name">NumPy</span><span
+                                class="tool-level">Advanced</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon sklearn">SK</div><span class="tool-name">Scikit-learn</span><span
+                                class="tool-level">Advanced</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon tensorflow">TF</div><span class="tool-name">TensorFlow</span><span
+                                class="tool-level">Learning</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon aws">AWS</div><span class="tool-name">AWS</span><span
+                                class="tool-level">Basic</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon linux">Lin</div><span class="tool-name">Linux</span><span
+                                class="tool-level">Proficient</span>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-icon git">Git</div><span class="tool-name">Git</span><span
+                                class="tool-level">Proficient</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="section">
+        <div class="container">
+            <h2 style="text-align:center;margin-bottom:2rem;">My Process</h2>
+            <div class="process-track fade-in">
+                <div class="process-step">
+                    <div class="step-dot">1</div>
+                    <h4 class="step-title">Frame</h4>
+                    <p class="step-desc">Translate business problems into data questions.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-dot">2</div>
+                    <h4 class="step-title">Explore</h4>
+                    <p class="step-desc">Deep dive into data to understand patterns.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-dot">3</div>
+                    <h4 class="step-title">Model</h4>
+                    <p class="step-desc">Build and tune predictive algorithms.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-dot">4</div>
+                    <h4 class="step-title">Test</h4>
+                    <p class="step-desc">Rigorous experimentation and validation.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-dot">5</div>
+                    <h4 class="step-title">Deploy</h4>
+                    <p class="step-desc">Productionize for real-world impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="results" class="section">
+        <div class="container">
+            <div class="results-grid fade-in">
+                <div class="result-card"><span class="result-val">25%</span><span class="result-label">Efficiency
+                        Gain</span></div>
+                <div class="result-card"><span class="result-val">99%</span><span class="result-label">Accuracy
+                        Rate</span></div>
+                <div class="result-card"><span class="result-val">40%</span><span class="result-label">Time Saved</span>
+                </div>
+                <div class="result-card"><span class="result-val">15+</span><span class="result-label">Projects
+                        Delivered</span></div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container fade-in">
+            <h2>Let's build something intelligent.</h2>
+            <p style="font-size:1.2rem;color:var(--text-muted);margin-bottom:2rem;">Open to Data Scientist roles and
+                collaborations.</p>
+            <a href="mailto:amritha@example.com" class="btn">Get in Touch</a>
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="#">Kaggle</a>
+                <a href="#">Email</a>
+            </div>
+            <div class="copyright">© 2025 Amritha Devangana. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+        // Fade-in observer
+        const fadeObserver = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+        // Counter animation
+        const counterObs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('[data-target]').forEach(el => {
+                        const target = parseInt(el.getAttribute('data-target'));
+                        if (isNaN(target)) return;
+                        let current = 0;
+                        const timer = setInterval(() => { current += target / 30; if (current >= target) { current = target; clearInterval(timer); } el.textContent = Math.floor(current) + '+'; }, 40);
+                    });
+                    counterObs.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+        const dashStats = document.querySelector('.dashboard-stats');
+        if (dashStats) counterObs.observe(dashStats);
+
+        // Skill bars animation
+        const barObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => { bar.style.width = width + '%'; }, 200);
+                    });
+                    barObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+        const skillBars = document.querySelector('.skill-bars');
+        if (skillBars) barObserver.observe(skillBars);
+
+        // D3 Radial Chart with Hover
+        const radialChart = document.getElementById('radial-chart');
+        if (radialChart && typeof d3 !== 'undefined') {
+            const skills = [
+                { name: 'Python', value: 92, desc: 'Programming' },
+                { name: 'SQL', value: 88, desc: 'Database' },
+                { name: 'Machine Learning', value: 85, desc: 'AI/ML' },
+                { name: 'Data Viz', value: 82, desc: 'Visualization' },
+                { name: 'Statistics', value: 78, desc: 'Analysis' }
+            ];
+            const colors = ['#00ff9d', '#00aaff', '#8855ff', '#ffaa00', '#ff5588'];
+
+            const size = 220;
+            const center = size / 2;
+            const outerRadius = 85;
+            const innerRadius = 50;
+            const gapAngle = 0.06; // Small gap between segments
+
+            // Create tooltip
+            const tooltip = d3.select('#radial-chart')
+                .append('div')
+                .attr('class', 'chart-tooltip');
+            tooltip.append('div').attr('class', 'tooltip-name');
+            tooltip.append('div').attr('class', 'tooltip-value');
+
+            const svg = d3.select('#radial-chart')
+                .append('svg')
+                .attr('viewBox', `0 0 ${size} ${size}`)
+                .attr('width', '100%')
+                .attr('height', '100%');
+
+            // Background ring
+            svg.append('circle')
+                .attr('cx', center)
+                .attr('cy', center)
+                .attr('r', outerRadius)
+                .attr('fill', 'none')
+                .attr('stroke', 'rgba(255,255,255,0.05)')
+                .attr('stroke-width', outerRadius - innerRadius);
+
+            // Arc generator - SAME SIZE for all
+            const arcGen = d3.arc()
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius)
+                .startAngle((d, i) => (i * 2 * Math.PI) / skills.length - Math.PI / 2 + gapAngle)
+                .endAngle((d, i) => ((i + 1) * 2 * Math.PI) / skills.length - Math.PI / 2 - gapAngle)
+                .cornerRadius(4);
+
+            // Skill arcs with hover
+            svg.selectAll('.skill-arc')
+                .data(skills)
+                .join('path')
+                .attr('class', 'skill-arc')
+                .attr('transform', `translate(${center}, ${center})`)
+                .attr('fill', (d, i) => colors[i])
+                .attr('d', arcGen)
+                .style('filter', 'drop-shadow(0 2px 6px rgba(0,0,0,0.3))')
+                .style('opacity', 0.9)
+                .on('mouseenter', function (event, d) {
+                    const i = skills.indexOf(d);
+                    d3.select(this)
+                        .style('opacity', 1)
+                        .style('filter', `drop-shadow(0 0 15px ${colors[i]})`);
+
+                    tooltip.select('.tooltip-name').text(d.name);
+                    tooltip.select('.tooltip-value')
+                        .text(d.value + '%')
+                        .style('color', colors[i]);
+                    tooltip.classed('visible', true);
+
+                    centerValue.text(d.value + '%');
+                    centerLabel.text(d.desc);
+                })
+                .on('mousemove', function (event) {
+                    const rect = radialChart.getBoundingClientRect();
+                    tooltip
+                        .style('left', (event.clientX - rect.left + 15) + 'px')
+                        .style('top', (event.clientY - rect.top - 10) + 'px');
+                })
+                .on('mouseleave', function () {
+                    d3.select(this)
+                        .style('opacity', 0.9)
+                        .style('filter', 'drop-shadow(0 2px 6px rgba(0,0,0,0.3))');
+                    tooltip.classed('visible', false);
+                    centerValue.text('85%');
+                    centerLabel.text('AVG SCORE');
+                });
+
+            // Skill labels around the chart
+            skills.forEach((skill, i) => {
+                const midAngle = (i * 2 * Math.PI) / skills.length - Math.PI / 2 + Math.PI / skills.length;
+                const labelRadius = outerRadius + 18;
+
+                svg.append('text')
+                    .attr('x', center + labelRadius * Math.cos(midAngle))
+                    .attr('y', center + labelRadius * Math.sin(midAngle))
+                    .attr('text-anchor', 'middle')
+                    .attr('dominant-baseline', 'middle')
+                    .attr('fill', colors[i])
+                    .attr('font-size', '10px')
+                    .attr('font-weight', '600')
+                    .attr('font-family', 'var(--font-display)')
+                    .text(skill.name.split(' ')[0]);
+            });
+
+            // Center circle
+            svg.append('circle')
+                .attr('cx', center)
+                .attr('cy', center)
+                .attr('r', innerRadius - 4)
+                .attr('fill', 'var(--surface)');
+
+            // Center text
+            const centerValue = svg.append('text')
+                .attr('x', center)
+                .attr('y', center - 6)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#fff')
+                .attr('font-size', '24px')
+                .attr('font-weight', '700')
+                .attr('font-family', 'var(--font-display)')
+                .text('85%');
+
+            const centerLabel = svg.append('text')
+                .attr('x', center)
+                .attr('y', center + 12)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#666')
+                .attr('font-size', '9px')
+                .text('AVG SCORE');
+        }
+
+        // D3 Area Chart
+        const areaChart = document.getElementById('area-chart');
+        if (areaChart && typeof d3 !== 'undefined') {
+            const data = [{ x: 0, y1: 20, y2: 15, y3: 10 }, { x: 1, y1: 35, y2: 25, y3: 18 }, { x: 2, y1: 50, y2: 40, y3: 28 }, { x: 3, y1: 62, y2: 52, y3: 40 }, { x: 4, y1: 78, y2: 65, y3: 52 }, { x: 5, y1: 90, y2: 78, y3: 65 }];
+            const margin = { top: 20, right: 20, bottom: 25, left: 30 }, width = 300 - margin.left - margin.right, height = 180 - margin.top - margin.bottom;
+            const svg = d3.select('#area-chart').append('svg').attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`).attr('width', '100%').append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear().domain([0, 5]).range([0, width]);
+            const y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+
+            const defs = svg.append('defs');
+            const addGrad = (id, color) => { const g = defs.append('linearGradient').attr('id', id).attr('x1', '0%').attr('y1', '0%').attr('x2', '0%').attr('y2', '100%'); g.append('stop').attr('offset', '0%').attr('stop-color', color).attr('stop-opacity', 0.5); g.append('stop').attr('offset', '100%').attr('stop-color', color).attr('stop-opacity', 0); };
+            addGrad('areaGrad1', '#00ff9d'); addGrad('areaGrad2', '#00aaff'); addGrad('areaGrad3', '#8855ff');
+
+            const area = key => d3.area().x(d => x(d.x)).y0(height).y1(d => y(d[key])).curve(d3.curveCatmullRom);
+            const line = key => d3.line().x(d => x(d.x)).y(d => y(d[key])).curve(d3.curveCatmullRom);
+
+            svg.append('path').datum(data).attr('fill', 'url(#areaGrad1)').attr('d', area('y1'));
+            svg.append('path').datum(data).attr('fill', 'url(#areaGrad2)').attr('d', area('y2'));
+            svg.append('path').datum(data).attr('fill', 'url(#areaGrad3)').attr('d', area('y3'));
+            svg.append('path').datum(data).attr('fill', 'none').attr('stroke', '#00ff9d').attr('stroke-width', 2.5).attr('d', line('y1'));
+            svg.append('path').datum(data).attr('fill', 'none').attr('stroke', '#00aaff').attr('stroke-width', 2.5).attr('d', line('y2'));
+            svg.append('path').datum(data).attr('fill', 'none').attr('stroke', '#8855ff').attr('stroke-width', 2.5).attr('d', line('y3'));
+
+            // Grid lines
+            [25, 50, 75].forEach(val => { svg.append('line').attr('x1', 0).attr('x2', width).attr('y1', y(val)).attr('y2', y(val)).attr('stroke', 'rgba(255,255,255,0.05)').attr('stroke-dasharray', '3,3'); });
+
+            // Legend
+            const legend = svg.append('g').attr('transform', `translate(0, ${height + 15})`);
+            [{ l: 'Analysis', c: '#00ff9d' }, { l: 'ML', c: '#00aaff' }, { l: 'Viz', c: '#8855ff' }].forEach((item, i) => {
+                legend.append('circle').attr('cx', i * 70).attr('cy', 0).attr('r', 4).attr('fill', item.c);
+                legend.append('text').attr('x', i * 70 + 8).attr('y', 4).attr('fill', '#888').attr('font-size', '10px').text(item.l);
+            });
+        }
+    </script>
+</body>
+
+</html>

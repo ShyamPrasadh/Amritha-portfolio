@@ -1,0 +1,120 @@
+---
+---
+<section class="hero section">
+  <div class="container hero-content">
+    <div class="hero-text">
+        <h1 class="animate-fade-in">Amritha Devangana Kadhirraj</h1>
+        <h2 class="animate-slide-up">Data Scientist & Analytics Professional</h2>
+        <p class="location animate-slide-up delay-1">Bengaluru, India | Open to Relocation (UK/India)</p>
+        <div class="cta-group animate-slide-up delay-2">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <!-- Abstract Data Visual Representation -->
+        <div class="data-orb"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 60%);
+  }
+
+  .hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .hero-text h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-text h2 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .location {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent-color);
+    color: #0f172a;
+    margin-right: 1rem;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+  }
+
+  .btn-secondary {
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(6, 182, 212, 0.1);
+  }
+
+  /* Simple Animation Classes */
+  .animate-fade-in { animation: fadeIn 1s ease-out; }
+  .animate-slide-up { animation: slideUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
+  .delay-1 { animation-delay: 0.2s; }
+  .delay-2 { animation-delay: 0.4s; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* Visual Element */
+  .data-orb {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(6,182,212,0.2) 0%, rgba(6,182,212,0) 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: pulse 4s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.5; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-content { flex-direction: column; text-align: center; }
+    .hero-text h1 { font-size: 2.5rem; }
+    .data-orb { display: none; }
+  }
+</style>
