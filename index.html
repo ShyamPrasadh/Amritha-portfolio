@@ -392,29 +392,7 @@
             transition: all 0.5s;
         }
 
-        .case-visual:hover {
-            border-color: var(--accent);
-            transform: scale(1.02);
-        }
-
-        .case-visual::before {
-            content: attr(data-num);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 8rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.02);
-            font-family: var(--font-display);
-            z-index: 0;
-        }
-
-        /* Data Stream Animation for Card 01 */
-        .data-stream {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
+        overflow: hidden;
         }
 
         .stream-line {
